@@ -1,0 +1,378 @@
+{
+ "actualizado": "2026-09-07T06:43:39.833403",
+ "resumen": {
+  "sitios_total": 60,
+  "sitios_ok": 28,
+  "anuncios": 11
+ },
+ "sitios": [
+  {
+   "sitio": "Superbid Chile",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "CGR - Compañía General de Remates",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "DICREP | Dirección General del Crédito Prendario",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Gestión de Activos - Tattersall",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Próximos Remates",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Marini",
+   "estado": "ok",
+   "n": 1
+  },
+  {
+   "sitio": "Remates Zárate",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Venegas",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Reyco",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Madrid",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Remates y Subastas",
+   "estado": "<urlopen error [Errno -3] Temp/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Manquehue",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Fuenzalida Remates",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Kozak",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Casa De Remates Drago Martillero",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Macal",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Karcal",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Del Río",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Andurand",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remate JDV",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Pereira",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "VEDISA REMATES",
+   "estado": "<urlopen error [Errno 104] Con",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Melipilla",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Zona Sur",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Carrillo",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "QREMATE.CL",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates MVR",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "RCI Remates",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "America Remates",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Julio Marticorena & Cía. Ltda.",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Beristain",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Vendaya - Remates",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Remates San Isidro",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "ReyTop Marketplace",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Calvac",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "estado": "ok",
+   "n": 10
+  },
+  {
+   "sitio": "Central Remates",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Electrónicos",
+   "estado": "<urlopen error [Errno -3] Temp/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Sayes",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates de propiedades - El Mercurio",
+   "estado": "<urlopen error [Errno 111] Con",
+   "n": 0
+  },
+  {
+   "sitio": "Casa de Remate Ramón Rey Ltda.",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remarti | Remates Jaime Marticorena",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Rancagua",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Subastas de Chile",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates P&J",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Chilebid Remates Online",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Casa de Remates Marambio",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Ossa & Cía",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remato.lat",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Casas en Remate",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Remates CDR (Carlos Díaz Ríos)",
+   "estado": "<urlopen error [Errno 104] Con",
+   "n": 0
+  },
+  {
+   "sitio": "Remates Maipú",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "Diario El Centro - Avisos Legales",
+   "estado": "robots",
+   "n": 0
+  },
+  {
+   "sitio": "El Mercurio - Económicos Remates",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Diario Oficial de Chile",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Poder Judicial de Chile (Subastas)",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Tesorería General de la República (TGR)",
+   "estado": "ok",
+   "n": 0
+  },
+  {
+   "sitio": "Aduanas de Chile",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Remates BKN",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  },
+  {
+   "sitio": "Martilleros de Chile",
+   "estado": "<urlopen error [Errno -2] Name/4intentos",
+   "n": 0
+  }
+ ],
+ "anuncios": [
+  {
+   "sitio": "Remates Marini",
+   "titulo": "CAMION HYUNDAI , MODELO HD 65 DLX D CAB, AÑO 2017, COLOR BLANCO",
+   "url": "https://www.rematesmarini.cl/2026/07/11/camion-hyundai-modelo-hd-65-dlx-d-cab-ano-2017-color-blanco/",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "KIA MORNING 2022 RTHS12",
+   "url": "https://www.adjudicado.cl/remate/kia-morning-2022-rths12/700",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CHEVROLET DMAX AÑO 2017 JTYW.76",
+   "url": "https://www.adjudicado.cl/remate/chevrolet-dmax-ano-2017-jtyw-76/698",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "NISSAN NP300 4WD AÑO 2017- JVXX39",
+   "url": "https://www.adjudicado.cl/remate/nissan-np300-4wd-ano-2017-jvxx39/697",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "NISSAN NP300 2WD AÑO 2018 - JXZL65",
+   "url": "https://www.adjudicado.cl/remate/nissan-np300-2wd-ano-2018-jxzl65-/696",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CHEVROLET SAIL 2019 - KRHR67",
+   "url": "https://www.adjudicado.cl/remate/chevrolet-sail-2019-krhr67/689",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "MITSUBISHI L200 KATANA 4WD AÑO 2018",
+   "url": "https://www.adjudicado.cl/remate/mitsubishi-l200-katana-4wd-ano-2018/694",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CAMIONETA DFSK 2025 - VBBX87",
+   "url": "https://www.adjudicado.cl/remate/camioneta-dfsk-2025-vbbx87/687",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CHEVROLET DMAX 4WD 2018 - KKPH40",
+   "url": "https://www.adjudicado.cl/remate/chevrolet-dmax-4wd-2018-kkph40/684",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "MITSUBISHI L200 2WD AÑO 2016",
+   "url": "https://www.adjudicado.cl/remate/mitsubishi-l200-2wd-ano-2016/683",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CHEVROLET DMAX 4WD 2018 - KKPH38",
+   "url": "https://www.adjudicado.cl/remate/chevrolet-dmax-4wd-2018-kkph38/685",
+   "precio": ""
+  }
+ ]
+}

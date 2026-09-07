@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RemateHub — Oportunidades en Remates Chile</title>
+<meta name="description" content="Motor de vigilancia de remates y oportunidades de maquinaria, vehículos y herramientas en Chile. Actualizado automáticamente cada noche.">
+<style>
+:root{
+  --bg:#0f172a; --panel:#1e293b; --panel2:#273449; --line:#334155;
+  --text:#e2e8f0; --muted:#94a3b8; --muted2:#64748b;
+  --blue:#1e3a8a; --blue2:#1e40af; --accent:#facc15; --accent-ink:#0f172a;
+  --link:#60a5fa; --ok:#065f46; --ok-t:#a7f3d0; --fail:#7f1d1d; --fail-t:#fca5a5;
+  --radius:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.45}
+header{background:linear-gradient(135deg,#1e3a8a,#1e40af);padding:24px 16px;border-bottom:3px solid var(--accent)}
+h1{font-size:clamp(1.3rem,4vw,2rem);font-weight:800;letter-spacing:.3px}
+h1 .accent{color:var(--accent)}
+.sub{color:#93c5fd;margin-top:6px;font-size:.88rem}
+main{padding:16px;max-width:1200px;margin:0 auto}
+/* stats */
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+.stat{background:var(--panel);border-radius:var(--radius);padding:12px 16px;border-left:4px solid var(--accent);flex:1;min-width:120px}
+.stat .n{font-size:1.6rem;font-weight:800;color:var(--accent)}
+.stat .l{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;align-items:center}
+.control{display:flex;flex-direction:column;gap:3px}
+.control label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.search,.control select,.control input{
+  padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:.95rem}
+.search{flex:1 1 240px;min-width:200px}
+.control select,.control input{width:auto}
+.control input.price{width:130px}
+.order{flex:1 1 180px;min-width:150px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.chip{padding:5px 12px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:.8rem;cursor:pointer}
+.chip:hover{color:var(--accent);border-color:var(--accent)}
+.result-count{font-size:.82rem;color:var(--muted);margin:6px 0 10px}
+/* table */
+.tablewrap{overflow-x:auto;background:var(--panel);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th{background:#334155;padding:10px 12px;text-align:left;font-size:.78rem;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td{padding:11px 12px;border-top:1px solid var(--line);font-size:.9rem;vertical-align:top}
+tr:hover td{background:var(--panel2)}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+.tag{display:inline-block;padding:2px 9px;border-radius:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-right:6px;white-space:nowrap}
+.tag.v{background:#1e3a8a;color:#bfdbfe}
+.tag.h{background:#78350f;color:#fde68a}
+.tag.m{background:#374151;color:#cbd5e1}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:700}
+.ok{background:var(--ok);color:var(--ok-t)}.fail{background:var(--fail);color:var(--fail-t)}
+h2.section{margin:26px 0 12px;font-size:1.05rem;color:#cbd5e1}
+.sitios{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.sitio-card{background:var(--panel);padding:10px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sitio-card .name{font-size:.8rem}
+.sitio-card .n{font-size:.78rem;color:var(--accent);font-weight:700}
+footer{margin:34px 0 30px;color:var(--muted2);font-size:.74rem;text-align:center;padding:0 12px}
+/* ---- CHAT FLOATING ---- */
+.chat-fab{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--accent);color:var(--accent-ink);border:none;border-radius:28px;padding:14px 20px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45);display:flex;align-items:center;gap:8px}
+.chat-fab .dot{width:9px;height:9px;border-radius:50%;background:#16a34a;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.chat{position:fixed;right:16px;bottom:86px;width:min(380px,calc(100vw - 24px));height:min(520px,calc(100vh - 130px));z-index:61;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.5);transform-origin:bottom right}
+.chat.hidden{display:none}
+.chat-head{background:linear-gradient(135deg,#1e3a8a,#1e40af);padding:12px 16px;border-bottom:2px solid var(--accent);display:flex;justify-content:space-between;align-items:center}
+.chat-head .t{font-weight:800;font-size:.95rem}
+.chat-head .s{font-size:.72rem;color:#bfdbfe}
+.chat-close{background:none;border:none;color:#bfdbfe;font-size:1.3rem;cursor:pointer;line-height:1}
+.chat-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:.86rem;line-height:1.45;white-space:pre-line}
+.msg.bot{background:var(--panel2);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:#1e40af;align-self:flex-end;border-bottom-right-radius:4px}
+.msg b{color:var(--accent)}
+.msg .mini{display:block;font-size:.72rem;color:var(--muted);margin-top:6px}
+.msg .mres{display:block;margin-top:5px;padding-top:6px;border-top:1px dashed var(--line);font-size:.82rem}
+.msg .mres a{color:var(--link)}
+.actions{display:flex;gap:8px;padding:0 12px 8px;flex-wrap:wrap}
+.act{flex:1;min-width:120px;text-align:center;padding:9px;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid var(--line);color:var(--text)}
+.act.wa{background:#064e3b;border-color:#065f46;color:#a7f3d0}
+.act.em{background:var(--panel2);color:#93c5fd}
+.act:hover{filter:brightness(1.15)}
+.chiprow{display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap}
+.sugg{font-size:.74rem;padding:5px 10px;border-radius:16px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);cursor:pointer}
+.sugg:hover{color:var(--accent);border-color:var(--accent)}
+.chat-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.chat-input input{flex:1;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:.9rem}
+.chat-input button{padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:var(--accent-ink);font-weight:800;cursor:pointer}
+@media(max-width:640px){
+  .stats{gap:8px}.stat{min-width:90px}
+  .chat{right:12px;bottom:78px;width:calc(100vw - 24px);height:calc(100vh - 170px)}
+  .chat-fab{right:12px;bottom:12px;padding:13px 16px}
+  .control input.price{width:100px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>REMATE<span class="accent">HUB</span> · Vigilancia de Remates Chile</h1>
+  <div class="sub" id="actualizado">Cargando…</div>
+</header>
+<main>
+  <div class="stats" id="stats"></div>
+
+  <div class="filters">
+    <input class="search" id="q" placeholder="Buscar vehículo, marca, herramienta, sitio…" aria-label="Buscar">
+    <span class="control"><label>Tipo</label>
+      <select id="fTipo">
+        <option value="">Todos</option>
+        <option value="v">Vehículo</option>
+        <option value="h">Herramienta</option>
+        <option value="m">Maquinaria</option>
+      </select></span>
+    <span class="control"><label>Casa de remate</label>
+      <select id="fSitio"><option value="">Todas</option></select></span>
+    <span class="control"><label>Precio mínimo (CLP)</label>
+      <input type="number" id="fMin" class="price" placeholder="0" min="0" step="500000" aria-label="Precio mínimo"></span>
+    <span class="control"><label>Precio máximo (CLP)</label>
+      <input type="number" id="fMax" class="price" placeholder="—" min="0" step="500000" aria-label="Precio máximo"></span>
+    <span class="control"><label>Ordenar por</label>
+      <select id="fOrder" class="order">
+        <option value="scan">Más reciente (orden escaneo)</option>
+        <option value="precioAsc">Precio: menor a mayor</option>
+        <option value="precioDesc">Precio: mayor a menor</option>
+        <option value="nombre">Nombre A-Z</option>
+      </select></span>
+  </div>
+
+  <div class="chips" id="quick"></div>
+  <div class="result-count" id="rcount"></div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Tipo</th><th>Sitio</th><th>Oportunidad</th><th>Precio</th><th>Ver</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <h2 class="section">Estado de las casas de remate</h2>
+  <div class="sitios" id="sitios"></div>
+</main>
+<footer>RemateHub · Motor de vigilancia del Holding Nexus · Escaneo nocturno cada 3 horas (23:00 · 02:00 · 05:00) con decencia (robots.txt respetado) · Precios y mínimos se confirman en la ficha oficial de cada casa de remates</footer>
+
+<button class="chat-fab" id="fab" aria-label="Abrir asistente">Asistente RemateHub <span class="dot" aria-hidden="true"></span></button>
+<div class="chat hidden" id="chat">
+  <div class="chat-head">
+    <div><div class="t">Asistente RemateHub</div><div class="s">Pregúntale por lo que buscas</div></div>
+    <button class="chat-close" id="chatClose" aria-label="Cerrar">×</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chiprow" id="chatSugg"></div>
+  <div class="actions" id="chatAct"></div>
+  <form class="chat-input" id="chatForm">
+    <input id="chatInput" placeholder="Ej: camionetas bajo 8 millones…" autocomplete="off">
+    <button type="submit" id="chatSend">Enviar</button>
+  </form>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+// Número WhatsApp de Don Gonzalo (código + número, solo dígitos). Si está vacío,
+// el botón "Contactar" cae a correo para no inventar un número.
+const WHATSAPP = "";
+const EMAIL_HUMANO = "gonzalo@obrasterranova.cl"; // destino de consultas profundizadas
+/* ================= TIPOS ================= */
+const TIPO_RULES = [
+  {t:'v', k:['camioneta','hilux','ranger',' s10','dmax','camion','auto','sedan','suv','toyota','ford','chevrolet','nissan','hyundai','kia','mitsubishi','l200','np300','morning','sail','lider',' vehiculo','vehiculos','4x4','pickup',' automovil','moto','auto']},
+  {t:'h', k:['compresor','generador','betonera','vibrador','compactadora',' placa ','andamio','demoledor','rotomartillo','esmeril','soldador','cortadora','alisadora','herramienta','herramientas','taladro','sierra','hidrolavadora']},
+  {t:'m', k:['terraplanadora','retroexcavadora','excavadora','minicargador','multilift','tolva','montacarga','elevador','hormigonera','maquinaria','maquinas','máquina','máquinas','equipo pesado','genie','oruga','niveladora','rodillo','mezcladora','cargador']}
+];
+function classify(a){
+  const t=(a.titulo||'').toLowerCase();
+  for(const r of TIPO_RULES){ if(r.k.some(k=>t.includes(k.trim()))) return r.t; }
+  return null;
+}
+const TIPO_LABEL={v:'Vehículo',h:'Herramienta',m:'Maquinaria'};
+const STOP=new Set(['busco','quiero','necesito','me','mi','una','un','unas','unos','de','para','que','los','las','hay','haya','hoy','remate','remates','oportunidades','lista','dime','muestra','cuantos','cuántas','cuantos','tienes','algun','algunas','bajo','hasta','menos','mas','más','sobre','desde','encima','millones','millon','million','clp','pesos','mejor','barato','todos','todas','donde','lo','la','el','en','con','por','se','esta','estos','cuando','ver','entre','pesada','pesado','todo','otra','otras','otro','otros']);
+/* ================= PRECIO ================= */
+function parsePrecio(s){
+  if(!s) return null;
+  const m=s.replace(/[$.,\s\u00a0]/g,'').match(/(\d+)/);
+  if(!m) return null;
+  const n=Number(m[1]);
+  return (isFinite(n)&&n>0)?n:null;
+}
+function fmtCLP(n){
+  if(!n) return '';
+  return '$'+n.toLocaleString('es-CL');
+}
+/* ================= ESTADO ================= */
+let DATA=null;
+const state={q:'',tipo:'',sitio:'',pmin:null,pmax:null,order:'scan'};
+const TYPE_STYLES={v:'tag v',h:'tag h',m:'tag m'};
+
+function normPriceFilters(){
+  const mn=state.pmin?Number(state.pmin):null;
+  const mx=state.pmax?Number(state.pmax):null;
+  return {mn,mx};
+}
+
+function applyFilters(){
+  const q=state.q.trim().toLowerCase();
+  const {mn,mx}=normPriceFilters();
+  let rows=DATA.anuncios.map(a=>({...a,tipo:classify(a)}));
+  if(state.tipo) rows=rows.filter(r=>r.tipo===state.tipo);
+  if(state.sitio) rows=rows.filter(r=>r.sitio===state.sitio);
+  if(mn)          rows=rows.filter(r=>(parsePrecio(r.precio)??Infinity)>=mn);
+  if(mx)          rows=rows.filter(r=>(parsePrecio(r.precio)??Infinity)<=mx);
+  if(q)           rows=rows.filter(r=>((r.titulo||'')+' '+(r.sitio||'')).toLowerCase().includes(q));
+  if(state.order==='precioAsc')  rows.sort((a,b)=>(parsePrecio(a.precio)??1e15)-(parsePrecio(b.precio)??1e15));
+  else if(state.order==='precioDesc') rows.sort((a,b)=>(parsePrecio(b.precio)??-1)-(parsePrecio(a.precio)??-1));
+  else if(state.order==='nombre') rows.sort((a,b)=>(a.titulo||'').localeCompare(b.titulo||'', 'es'));
+  return rows;
+}
+
+function render(){
+  const s=normPriceFilters();
+  s.mn=state.pmin?Number(state.pmin):null;
+  const rows=applyFilters();
+  document.getElementById('rcount').textContent=rows.length+' resultado'+(rows.length===1?'':'s');
+  document.getElementById('rows').innerHTML=rows.length
+    ? rows.map(a=>{
+        const tag=a.tipo?`<span class="${TYPE_STYLES[a.tipo]}">${TIPO_LABEL[a.tipo]}</span>`:'';
+        const p=parsePrecio(a.precio);
+        return `<tr><td>${tag||'<span class="muted">—</span>'}</td><td>${a.sitio}</td><td>${a.titulo}</td><td>${p?fmtCLP(p):'<span style="color:var(--muted)">ver ficha</span>'}</td><td><a href="${a.url}" target="_blank" rel="noopener">ver →</a></td></tr>`;
+      }).join('')
+    : '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:22px">Sin resultados con los filtros actuales</td></tr>';
+  renderSitios();
+}
+function renderSitios(){
+  document.getElementById('sitios').innerHTML=DATA.sitios.map(s=>{
+    const ok=s.estado==='ok' || /intentos/.test(s.estado);
+    const badge=ok?(s.n>0?`<span style="color:var(--accent);font-weight:700">${s.n}</span>`:'<span class="badge ok">OK</span>')
+                  :`<span class="badge fail">${(s.estado||'').replace(/intentos/,'').slice(0,12)}</span>`;
+    return `<div class="sitio-card"><span class="name">${s.sitio}</span>${badge}</div>`;
+  }).join('');
+}
+
+function init(){
+  document.getElementById('actualizado').textContent='Última actualización: '+new Date(DATA.actualizado).toLocaleString('es-CL',{dateStyle:'long',timeStyle:'short'});
+  const s=DATA.resumen;
+  document.getElementById('stats').innerHTML=
+    `<div class="stat"><div class="n">${s.sitios_ok}</div><div class="l">Sitios activos</div></div>
+     <div class="stat"><div class="n">${s.anuncios}</div><div class="l">Oportunidades capturadas</div></div>
+     <div class="stat"><div class="n">${s.sitios_total}</div><div class="l">Casas vigiladas</div></div>`;
+  // dropdown de sitios (solo con anuncios + optimista todos)
+  const sitios=[...new Set(DATA.anuncios.map(a=>a.sitio))].sort((a,b)=>a.localeCompare(b,'es'));
+  const opts=['<option value="">Todas</option>',...sitios.map(x=>`<option value="${x}">${x}</option>`)].join('');
+  document.getElementById('fSitio').innerHTML=opts;
+  // filtros rápidos
+  document.getElementById('quick').innerHTML=[
+    {l:'Vehículos',t:'v'},{l:'Camionetas',k:'camioneta'},{l:'Herramientas',t:'h'},
+    {l:'Maquinaria',t:'m'},{l:'Todo hoy',v:'clear'}
+  ].map(c=>`<button class="chip" data-q="${c.k||''}" data-t="${c.t||''}" data-clear="${c.v||''}">${c.l}</button>`).join('');
+  // estado
+  [['q','q',e=>state.q=e.value],
+   ['fTipo','tipo',e=>state.tipo=e.value],
+   ['fSitio','sitio',e=>state.sitio=e.value],
+   ['fMin','pmin',e=>state.pmin=e.value||null],
+   ['fMax','pmax',e=>state.pmax=e.value||null],
+   ['fOrder','order',e=>state.order=e.value]
+  ].forEach(([id,key,fn])=>{
+    const el=document.getElementById(id);
+    if(id==='q') el.addEventListener('input',e=>{fn(e);render();});
+    else el.addEventListener('change',e=>{fn(e);render();});
+  });
+  document.getElementById('quick').addEventListener('click',e=>{
+    const b=e.target.closest('.chip'); if(!b) return;
+    if(b.dataset.clear){state.q='';state.tipo='';state.sitio='';state.pmin=null;state.pmax=null;}
+    else if(b.dataset.t){ state.tipo=''; state.q=b.dataset.q||''; }
+    document.getElementById('q').value=state.q;
+    document.getElementById('fTipo').value=state.tipo;
+    render();
+  });
+  render();
+}
+
+/* ================= CHAT / AGENTE ================= */
+const CHAT_SUGG=['camionetas bajo 8 millones','chevrolet dmax','remates marini','lo que haya en adjudicado','maquinaria pesada'];
+const chatBody=document.getElementById('chatBody');
+document.getElementById('fab').addEventListener('click',()=>{document.getElementById('chat').classList.toggle('hidden');if(!document.getElementById('chat').classList.contains('hidden')&&chatBody.children.length===0)bot('Hola, soy el asistente de RemateHub. Puedo filtrar la tabla por tipo, precio, casa de remate o palabra clave. Prueba con una de estas:');
+  renderSugg();
+  renderAct();
+});
+document.getElementById('chatClose').addEventListener('click',()=>document.getElementById('chat').classList.add('hidden'));
+document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const v=document.getElementById('chatInput').value.trim();if(!v)return;user(v);document.getElementById('chatInput').value='';answer(v);});
+
+function bot(html){const d=document.createElement('div');d.className='msg bot';d.innerHTML=html;appendMsg(d);}
+function user(t){const d=document.createElement('div');d.className='msg user';d.textContent=t;appendMsg(d);}
+function appendMsg(el){chatBody.appendChild(el);chatBody.scrollTop=chatBody.scrollHeight;}
+function renderSugg(){
+  document.getElementById('chatSugg').innerHTML=CHAT_SUGG.map(c=>`<button class="sugg">${c}</button>`).join('');
+  document.getElementById('chatSugg').onclick=e=>{const s=e.target.closest('.sugg');if(!s)return;const qs=s.textContent;user(qs);answer(qs);};
+}
+function renderAct(){
+  const wa=WHATSAPP?`https://wa.me/${WHATSAPP}`:('mailto:'+EMAIL_HUMANO+'?subject='+encodeURIComponent('Contacto RemateHub por una oportunidad'));
+  document.getElementById('chatAct').innerHTML=
+    `<a class="act wa" target="_blank" rel="noopener" href="${wa}">Contactar por WhatsApp</a>
+     <a class="act em" href="mailto:${EMAIL_HUMANO}?subject=${encodeURIComponent('Contacto RemateHub')}">Escribir</a>`;
+}
+
+/* ---- parser de lenguaje natural ---- */
+function findTipo(q){
+  for(const r of TIPO_RULES){ if(r.k.some(k=>k && q.includes(k.trim()))) return r.t; }
+  return null;
+}
+function kwTerms(q){
+  return q.toLowerCase().split(/[\s,.;?!¿¡]+/).filter(w=>w && !STOP.has(w) && !/^\d/.test(w));
+}
+function findSitio(q){
+  const tokens=kwTerms(q).filter(w=>w.length>=3);
+  const names=[...new Set(DATA.anuncios.map(a=>a.sitio))];
+  let best=null,bestLen=0;
+  for(const n of names){
+    const ln=n.toLowerCase();
+    const base=ln.replace(/[^a-zñáéíóú]/g,'');
+    for(const t of tokens){
+      if((ln.includes(t)||t.includes(base))&&t.length>bestLen){best=n;bestLen=t.length;}
+    }
+  }
+  return best;
+}
+function findPrecio(q){
+  let pmax=null,pmin=null;
+  // millones o miles
+  const ql=q.toLowerCase();
+  // número + millones
+  const milli=ql.match(/(\d+(?:[.,]\d+)?)\s*millones?/);
+  let baseN= milli? parseFloat(milli[1].replace(',','.'))*1e6 : null;
+  // número CLP con formato $5.000.000
+  if(baseN===null){ const full=ql.match(/(\d+[.,]?\d*)\s*(?:clp|pesos)/); if(full) baseN=parseFloat(full[1].replace(',','.'))*(full[1].includes('.')?1: (parseFloat(full[1])<1000?1e6:1)); }
+  if(baseN===null) return {pmin,pmax};
+  const maxCue=/bajo|menos de|no mas de|hasta|por debajo|maximo|max|top|debajo/.test(ql);
+  const minCue=/sobre|mas de|desde|encima|minimo|a partir|supera/.test(ql);
+  if(minCue && !maxCue) pmin=baseN; else if(maxCue) pmax=baseN; else pmax=baseN; // default: tope
+  // rango "entre X y Y millones"
+  if(/entre/.test(ql)){ const r=ql.match(/entre\s*(\d+)\s*y\s*(\d+)/); if(r){pmin=parseFloat(r[1])*1e6;pmax=parseFloat(r[2])*1e6;} }
+  return {pmin,pmax};
+}
+function isTypeOrSitioWord(w){
+  if(!w) return false;
+  const tw=TIPO_RULES.flatMap(r=>r.k).map(x=>x.trim()).filter(Boolean);
+  if(tw.some(k=>k.includes(w)||w.includes(k))) return true;
+  const sw=DATA.anuncios.map(a=>a.sitio.toLowerCase());
+  if(sw.some(s=>s.includes(w)&&w.length>=4)) return true;
+  return false;
+}
+
+function answer(raw){
+  const q=raw.toLowerCase();
+  // reinicia filtros por turno (búsqueda predictiva: cada pregunta refresca su criterio)
+  state.q=''; state.tipo=''; state.sitio=''; state.pmin=null; state.pmax=null;
+  document.getElementById('q').value=''; document.getElementById('fTipo').value='';
+  document.getElementById('fMin').value=''; document.getElementById('fMax').value=''; document.getElementById('fSitio').value='';
+
+  const tipo=findTipo(q);
+  const sitio=findSitio(q);
+  const {pmin,pmax}=findPrecio(q);
+  const kwq=kwTerms(q).join(' ');
+
+  // si parece que NO hay criterio accionable → derivar humano
+  const useKw=kwq.split(' ').filter(w=>!isTypeOrSitioWord(w)).join(' ');
+  const hasCriterio = tipo || sitio || pmin!=null || pmax!=null || useKw;
+  if(!hasCriterio){
+    bot(`Entiendo tu consulta, pero para profundizarla con precisión prefiero derivarla.<br><b>Lo paso a Lorenzo</b> para que te responda con detalle.<span class="mini">Toca "Escribir" abajo y cuéntale exactamente qué buscas (marca, modelo, presupuesto).</span>`);
+    render(); renderAct(); return;
+  }
+  // construir filtro
+  if(tipo){ state.tipo=tipo; document.getElementById('fTipo').value=tipo; }
+  if(sitio){ state.sitio=sitio; document.getElementById('fSitio').value=sitio; }
+  if(pmin!=null){ state.pmin=pmin; document.getElementById('fMin').value=pmin; }
+  if(pmax!=null){ state.pmax=pmax; document.getElementById('fMax').value=pmax; }
+  state.q=useKw;
+  if(useKw) document.getElementById('q').value=useKw;
+
+  const rows=applyFilters();
+  render();
+
+  // construir respuesta
+  const parts=[];
+  if(tipo) parts.push('tipo <b>'+TIPO_LABEL[tipo].toLowerCase()+'</b>');
+  if(sitio) parts.push('casa <b>'+sitio+'</b>');
+  if(pmin!=null) parts.push('desde <b>'+fmtCLP(pmin)+'</b>');
+  if(pmax!=null) parts.push('hasta <b>'+fmtCLP(pmax)+'</b>');
+  if(useKw) parts.push('con "<b>'+useKw+'</b>"');
+
+  if(rows.length===0){
+    // consulta libre y compleja sin coincidencia estructural → derivar a un humano
+    const estructural = tipo || sitio || pmin!=null || pmax!=null;
+    if(!estructural){
+      bot(`No encontré en el radar algo que combine con tu pedido, y esta parte se beneficia de un análisis a medida.<br><b>Lo paso a Lorenzo</b> para que lo profundice.<span class="mini">Toca "Escribir" abajo y cuéntale exactamente qué buscas (marca, modelo, año, presupuesto).</span>`);
+      renderAct(); return;
+    }
+    bot('No encontré oportunidades'+(parts.length?' para '+parts.join(", "):'')+'.<span class="mini">La tabla quedó filtrada y vacía. Si quieres, afino la búsqueda contigo o <b>lo paso a Lorenzo</b> para revisarlo a fondo. </span>');
+    return;
+  }
+  const top=rows.slice(0,3).map(r=>{
+    const p=parsePrecio(r.precio);
+    return `<span class="mres">• ${r.titulo} <span style="color:var(--muted)">(${r.sitio} · ${p?fmtCLP(p):'ver ficha'})</span> — <a href="${r.url}" target="_blank" rel="noopener">ver</a></span>`;
+  }).join('');
+  const avisoPrec = pmax!=null ? `<span class="mini">Solo cuento precios confirmados en la ficha capturada; lo que figura como "ver ficha" lo excluí de este rango de precio.</span>` : '';
+  bot(`Encontré <b>${rows.length}</b> oportunidad${rows.length===1?'':'es'}${parts.length?' para '+parts.join(", "):''}. Ajusté la tabla con tu pedido:<br>${top}${avisoPrec}<span class="mini">¿Quieres refinar por otro precio, marca o casa de remate? Pregúntame o usa los filtros de arriba.</span>`);
+}
+
+/* ---- arranque ---- */
+fetch('data.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{
+  DATA=d;
+  init();
+}).catch(()=>{
+  document.getElementById('actualizado').textContent='data.json no disponible — correr scanner_completo.py';
+  document.getElementById('rows').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted)">Sin datos aún</td></tr>';
+});
+</script>
+</body>
+</html>
