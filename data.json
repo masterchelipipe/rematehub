@@ -1,8 +1,8 @@
 {
- "actualizado": "2026-09-07T06:43:39.833403",
+ "actualizado": "2026-09-08T00:50:26.678804",
  "resumen": {
   "sitios_total": 60,
-  "sitios_ok": 28,
+  "sitios_ok": 30,
   "anuncios": 11
  },
  "sitios": [
@@ -113,7 +113,7 @@
   },
   {
    "sitio": "VEDISA REMATES",
-   "estado": "<urlopen error [Errno 104] Con",
+   "estado": "ok",
    "n": 0
   },
   {
@@ -258,7 +258,7 @@
   },
   {
    "sitio": "Remates CDR (Carlos Díaz Ríos)",
-   "estado": "<urlopen error [Errno 104] Con",
+   "estado": "ok",
    "n": 0
   },
   {
