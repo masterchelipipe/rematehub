@@ -1,8 +1,8 @@
 {
- "actualizado": "2026-09-08T00:50:26.678804",
+ "actualizado": "2026-09-09T00:40:57.173183",
  "resumen": {
   "sitios_total": 60,
-  "sitios_ok": 30,
+  "sitios_ok": 29,
   "anuncios": 11
  },
  "sitios": [
@@ -123,7 +123,7 @@
   },
   {
    "sitio": "Remates Zona Sur",
-   "estado": "ok",
+   "estado": "http_403",
    "n": 0
   },
   {
@@ -316,6 +316,12 @@
   },
   {
    "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "CAMIONETA DFSK 2025 - VBBX87",
+   "url": "https://www.adjudicado.cl/remate/camioneta-dfsk-2025-vbbx87/687",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
    "titulo": "KIA MORNING 2022 RTHS12",
    "url": "https://www.adjudicado.cl/remate/kia-morning-2022-rths12/700",
    "precio": ""
@@ -348,12 +354,6 @@
    "sitio": "Remates Destacados - Adjudicado",
    "titulo": "MITSUBISHI L200 KATANA 4WD AÑO 2018",
    "url": "https://www.adjudicado.cl/remate/mitsubishi-l200-katana-4wd-ano-2018/694",
-   "precio": ""
-  },
-  {
-   "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "CAMIONETA DFSK 2025 - VBBX87",
-   "url": "https://www.adjudicado.cl/remate/camioneta-dfsk-2025-vbbx87/687",
    "precio": ""
   },
   {
