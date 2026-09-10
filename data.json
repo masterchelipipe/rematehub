@@ -1,8 +1,8 @@
 {
- "actualizado": "2026-09-10T00:43:52.995371",
+ "actualizado": "2026-09-10T03:45:32.700587",
  "resumen": {
   "sitios_total": 60,
-  "sitios_ok": 29,
+  "sitios_ok": 28,
   "anuncios": 11
  },
  "sitios": [
@@ -258,7 +258,7 @@
   },
   {
    "sitio": "Remates CDR (Carlos Díaz Ríos)",
-   "estado": "ok",
+   "estado": "<urlopen error [Errno 104] Con",
    "n": 0
   },
   {
