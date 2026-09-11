@@ -1,9 +1,9 @@
 {
- "actualizado": "2026-09-10T06:45:18.657277",
+ "actualizado": "2026-09-11T00:42:26.219531",
  "resumen": {
   "sitios_total": 60,
   "sitios_ok": 28,
-  "anuncios": 11
+  "anuncios": 8
  },
  "sitios": [
   {
@@ -184,7 +184,7 @@
   {
    "sitio": "Remates Destacados - Adjudicado",
    "estado": "ok",
-   "n": 10
+   "n": 7
   },
   {
    "sitio": "Central Remates",
@@ -316,12 +316,6 @@
   },
   {
    "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "CAMIONETA DFSK 2025 - VBBX87",
-   "url": "https://www.adjudicado.cl/remate/camioneta-dfsk-2025-vbbx87/687",
-   "precio": ""
-  },
-  {
-   "sitio": "Remates Destacados - Adjudicado",
    "titulo": "KIA MORNING 2022 RTHS12",
    "url": "https://www.adjudicado.cl/remate/kia-morning-2022-rths12/700",
    "precio": ""
@@ -340,8 +334,14 @@
   },
   {
    "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "NISSAN NP300 2WD AÑO 2018 - JXZL65",
-   "url": "https://www.adjudicado.cl/remate/nissan-np300-2wd-ano-2018-jxzl65-/696",
+   "titulo": "NISSAN NP300 2WD AÑO 2018 - JXZL67",
+   "url": "https://www.adjudicado.cl/remate/nissan-np300-2wd-ano-2018-jxzl67/696",
+   "precio": ""
+  },
+  {
+   "sitio": "Remates Destacados - Adjudicado",
+   "titulo": "HYUNDAI TUCSON 2.0 AÑO 2016 - DADO DE BAJA PARA DESARME",
+   "url": "https://www.adjudicado.cl/remate/hyundai-tucson-2-0-ano-2016-dado-de-baja-para-desarme/702",
    "precio": ""
   },
   {
@@ -354,24 +354,6 @@
    "sitio": "Remates Destacados - Adjudicado",
    "titulo": "MITSUBISHI L200 KATANA 4WD AÑO 2018",
    "url": "https://www.adjudicado.cl/remate/mitsubishi-l200-katana-4wd-ano-2018/694",
-   "precio": ""
-  },
-  {
-   "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "CHEVROLET DMAX 4WD 2018 - KKPH40",
-   "url": "https://www.adjudicado.cl/remate/chevrolet-dmax-4wd-2018-kkph40/684",
-   "precio": ""
-  },
-  {
-   "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "MITSUBISHI L200 2WD AÑO 2016",
-   "url": "https://www.adjudicado.cl/remate/mitsubishi-l200-2wd-ano-2016/683",
-   "precio": ""
-  },
-  {
-   "sitio": "Remates Destacados - Adjudicado",
-   "titulo": "CHEVROLET DMAX 4WD 2018 - KKPH38",
-   "url": "https://www.adjudicado.cl/remate/chevrolet-dmax-4wd-2018-kkph38/685",
    "precio": ""
   }
  ]
