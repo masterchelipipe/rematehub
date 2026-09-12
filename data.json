@@ -1,9 +1,9 @@
 {
- "actualizado": "2026-09-11T06:34:38.398805",
+ "actualizado": "2026-09-12T00:41:00.488390",
  "resumen": {
   "sitios_total": 60,
-  "sitios_ok": 28,
-  "anuncios": 8
+  "sitios_ok": 29,
+  "anuncios": 7
  },
  "sitios": [
   {
@@ -34,7 +34,7 @@
   {
    "sitio": "Remates Marini",
    "estado": "ok",
-   "n": 1
+   "n": 0
   },
   {
    "sitio": "Remates Zárate",
@@ -258,7 +258,7 @@
   },
   {
    "sitio": "Remates CDR (Carlos Díaz Ríos)",
-   "estado": "<urlopen error [Errno 104] Con",
+   "estado": "ok",
    "n": 0
   },
   {
@@ -308,12 +308,6 @@
   }
  ],
  "anuncios": [
-  {
-   "sitio": "Remates Marini",
-   "titulo": "CAMION HYUNDAI , MODELO HD 65 DLX D CAB, AÑO 2017, COLOR BLANCO",
-   "url": "https://www.rematesmarini.cl/2026/07/11/camion-hyundai-modelo-hd-65-dlx-d-cab-ano-2017-color-blanco/",
-   "precio": ""
-  },
   {
    "sitio": "Remates Destacados - Adjudicado",
    "titulo": "KIA MORNING 2022 RTHS12",
